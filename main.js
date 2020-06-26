@@ -17,8 +17,7 @@
         signalObj = new signal(wsurl,
             function (stream) {
                 console.log('got a stream!');
-                document.querySelector('.oioi').style.display = 'none'
-                document.querySelector('.vid').style.display = 'flex'
+
                 video1.srcObject = stream;
                 video1.play();
                 video2.srcObject = stream;
@@ -52,6 +51,8 @@
         var start = document.getElementById('start');
         if (start) {
             start.addEventListener('click', function (e) {
+                document.querySelector('.oioi').style.display = 'none'
+                document.querySelector('.vid').style.display = 'flex'
                 startPlay();
             }, false);
         }
