@@ -51,6 +51,7 @@
         if (start) {
             start.addEventListener('click', function (e) {
                 document.querySelector('.oioi').style.display = 'none'
+                document.querySelector('.vid').style.display = 'flex'
                 startPlay();
             }, false);
         }
