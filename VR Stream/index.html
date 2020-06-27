@@ -7,30 +7,16 @@
         <style>
             body,html {
                 text-align:center;
-                color:#fff;
-                background-color:#ffffff;
                 width: 100%;
                 height: 100%;
                 padding: 0;
                 margin: 0;
-            }
-            #server {
-                display:block;
-                margin:0% auto 2%;
+                background-color: black;
             }
             #start {
                 display:inline-block;
                 margin:0% auto 2%;
             }
-            #stop {
-                display:none;
-                margin:0% auto 2%;
-            }
-           video {
-               /* position:absolute;*/
-               /* visibility:hidden;*/
-            }
-            /*canvas { border:8px solid #fff;}*/
             button {
                 border:none;
                 display:block;
@@ -38,7 +24,7 @@
                 margin:1% auto 0;
                 cursor:pointer;
                 color:#fff;
-                background-color:#9f361b;
+                background-color:#ff3300;
             }
             button:active { background-color:#e44d26; }
             .vid{
@@ -65,7 +51,6 @@
 	    <label>
 		<input type="checkbox" id="remote_hw_vcodec" checked name="remote_hw_vcodec" value="remote_hw_vcodec" title="try to force the use of the hardware codec for both encoding and decoding if enabled and supported">H.264 Codec
 	    </label>
-
         </div>
         <div class = 'vid'>
             <video id='v1' playsinline autoplay></video>
@@ -75,44 +60,44 @@
 <script>
     (function () {
 
-var signalObj = null;
+    var signalObj = null;
 
-function startPlay() {
-    if (signalObj)
-        return;
+    function startPlay() {
+        if (signalObj)
+            return;
 
-    var hostname = location.hostname;
-    var address = hostname + ':' + (location.port || (location.protocol === 'https:' ? 443 : 80)) + '/webrtc';
-    var protocol = location.protocol === "https:" ? "wss:" : "ws:";
-    var wsurl = protocol + '//' + address;
+        var hostname = location.hostname;
+        var address = hostname + ':' + (location.port || (location.protocol === 'https:' ? 443 : 80)) + '/webrtc';
+        var protocol = location.protocol === "https:" ? "wss:" : "ws:";
+        var wsurl = protocol + '//' + address;
 
-    var video1 = document.querySelector('#v1');
-    var video2 = document.querySelector('#v2');
+        var video1 = document.querySelector('#v1');
+        var video2 = document.querySelector('#v2');
 
-    signalObj = new signal(wsurl,
-        function (stream) {
-            console.log('got a stream!');
+        signalObj = new signal(wsurl,
+            function (stream) {
+                console.log('got a stream!');
 
-            video1.srcObject = stream;
-            video1.play();
-            video2.srcObject = stream;
-            video2.play();
-        },
-        function (error) {
-            alert(error);
-            signalObj = null;
-        },
-        function () {
-            console.log('websocket closed. bye bye!');
-            video1.srcObject = null;
-            video2.srcObject = null;
-            signalObj = null;
-        },
-        function (message) {
-            alert(message);
-        }
-    );
-}
+                video1.srcObject = stream;
+                video1.play();
+                video2.srcObject = stream;
+                video2.play();
+            },
+            function (error) {
+                alert(error);
+                signalObj = null;
+            },
+            function () {
+                console.log('websocket closed. bye bye!');
+                video1.srcObject = null;
+                video2.srcObject = null;
+                signalObj = null;
+            },
+            function (message) {
+                alert(message);
+            }
+        );
+    }
 
 function stopPlay() {
     if (signalObj) {
@@ -132,15 +117,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }, false);
     }
     else {
-        // auto play if there is no stop button
         startPlay();
-    }
-
-    var stop = document.getElementById('stop');
-    if (stop) {
-        stop.addEventListener('click', function (e) {
-            stopPlay();
-        }, false);
     }
 
     window.viewPause = stopPlay;

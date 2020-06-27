@@ -1,6 +1,10 @@
 import curses
 import RPi.GPIO as GPIO
-
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(3,GPIO.OUT)
+GPIO.setup(5,GPIO.OUT)
+GPIO.setup(8,GPIO.OUT)
+GPIO.setup(10,GPIO.OUT)
 
 def forward():
     GPIO.output(3,1)
@@ -32,21 +36,13 @@ def stop():
     GPIO.output(8,0)
     GPIO.output(10,0)
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(3,GPIO.OUT)
-GPIO.setup(5,GPIO.OUT)
-GPIO.setup(8,GPIO.OUT)
-GPIO.setup(10,GPIO.OUT)
+
 
 
 def main(stdscr):
     stdscr.nodelay(1)
     while True:
         c = stdscr.getch()
-        #up arrow is 259
-        #down 258
-        #left 260
-        #right 261
         if c != -1:
             if c == 259:
                 print('forward')
@@ -60,7 +56,6 @@ def main(stdscr):
             if c == 261:
                 print('right')
                 right()
-            stop()
         else:
             stop()
             print('stop')
