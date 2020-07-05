@@ -6,6 +6,11 @@ GPIO.setup(5,GPIO.OUT)
 GPIO.setup(8,GPIO.OUT)
 GPIO.setup(10,GPIO.OUT)
 
+GPIO.output(3,0)
+GPIO.output(5,0)
+GPIO.output(8,0)
+GPIO.output(10,0)
+
 def forward():
     GPIO.output(3,1)
     GPIO.output(5,0)

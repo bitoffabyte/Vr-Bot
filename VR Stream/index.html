@@ -41,7 +41,7 @@
             }
         </style>
 	<script src='adapter.js'></script>
-        <script src='signalling.js'></script>
+    <script src='signalling.js'></script>
 
     </head>
     <body>
@@ -88,7 +88,7 @@
                 signalObj = null;
             },
             function () {
-                console.log('websocket closed. bye bye!');
+                console.log('websocket closed. YEET!');
                 video1.srcObject = null;
                 video2.srcObject = null;
                 signalObj = null;
@@ -116,12 +116,6 @@ window.addEventListener('DOMContentLoaded', function () {
             startPlay();
         }, false);
     }
-    else {
-        startPlay();
-    }
-
-    window.viewPause = stopPlay;
-    window.viewResume = startPlay;
 });
 })();
 
